@@ -24,7 +24,6 @@ def opdater_prognose_db():
     elif nu_sammenlagt > opdatering_tidspunkter_sek[2] and nu_sammenlagt < opdatering_tidspunkter_sek[3]:
         sleep_tid = opdatering_tidspunkter_sek[3] - nu_sammenlagt
         print(f"Sover i {sleep_tid} sekunder indtil kl. {int(opdatering_tidspunkter[3])}:00")
-        # sleep(10)
         sleep(sleep_tid)
     elif nu_sammenlagt > opdatering_tidspunkter_sek[3] and nu_sammenlagt < opdatering_tidspunkter_sek[4]:
         sleep_tid = opdatering_tidspunkter_sek[4] - nu_sammenlagt
@@ -51,15 +50,9 @@ def request_API_data():
     records = result.get('records', [])
     sum = 0
     DK2_udledning = records[1::2]
-#     print('Udledninger af CO2 øst for Storebælt i g/kWh:')
-
     for record in DK2_udledning:
-#         print(' ', record)
         sum += record['CO2Emission']
-
     avg = int(sum / (limit))
-
-#     print(f"\nGennemsnits udledning af CO2 øst for Storebælt i g/kWh: {avg}")
     return DK2_udledning
 
 
@@ -91,16 +84,12 @@ def insert_API_data_to_db(DK2_udledning):
         except Exception as e:
             print(f"Error occured: {e}")
         finally:
-            # conn.close()
             pass
 
 def data_func():
     while True:
         insert_API_data_to_db(request_API_data())
         opdater_prognose_db()
-
-# while True:
-#     data_func()
 
 
 
