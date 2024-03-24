@@ -31,9 +31,6 @@ def hvornår_skal_der_opdateres():
 
 def opdater_strøm_stilling():
     z, nu_dato = hvornår_skal_der_opdateres()
-    # print(z)
-    # print(nu_dato)
-    # print(f"SELECT Tidspunkt, Dato, CO2_g_pr_kWh FROM CO2_Prognose WHERE Tidspunkt == '{z}' AND Dato == '{nu_dato}'")
     conn = sqlite3.connect(database="database/web_database.db")
     try:
         cur = conn.cursor()
@@ -49,9 +46,5 @@ def opdater_strøm_stilling():
         print(f"Error calling SQL: '{e}'")
     finally:
         pass
-        # conn.close()
         
     return co2_udledning
-
-# hvornår_skal_der_opdateres()
-opdater_strøm_stilling()
