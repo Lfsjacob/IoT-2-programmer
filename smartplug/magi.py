@@ -17,8 +17,6 @@ relæ_1.on()
 relæ_2.on()
 relæ_3.on()
 
-# data_func()
-
 sort_lad = False
 
 def kør_som_satan():
@@ -39,16 +37,13 @@ def co2_stadier():
 
     co2_udledning = database.opdater_strøm_stilling()
 
-    # print(co2_udledning)
     effekt = INA219_script.læs_ina()
 
     co2_tærskel = 60
-    # print(effekt)
     if co2_udledning <= co2_tærskel and effekt >= 500 and sort_lad == False:
         relæ_1.on()
         relæ_3.on()
         relæ_2.off()
-        # print("lader USB enhed")
         status = 'Grøn Strøm'
         Neopixel_strøm.strøm_farve(Neopixel_strøm.farver["grøn"], False)
         sleep(1)
@@ -57,7 +52,6 @@ def co2_stadier():
         relæ_2.on()
         relæ_3.off()
         relæ_1.off()
-        # print("lader batteri")
         status = 'Grøn Strøm'
         Neopixel_strøm.strøm_farve(Neopixel_strøm.farver["grøn"], False)
         sleep(1)
@@ -66,7 +60,6 @@ def co2_stadier():
         relæ_1.on()
         relæ_2.on()
         relæ_3.off()
-        # print("lader USB enhed fra batteri")
         status = 'Sort Strøm'
         Neopixel_strøm.strøm_farve(Neopixel_strøm.farver["rød"], False)
         sleep(1)
@@ -75,7 +68,6 @@ def co2_stadier():
         relæ_1.on()
         relæ_3.on()
         relæ_2.off()
-        # print("lader USB enhed med sort strøm")
         status = 'Sort Strøm'
         Neopixel_strøm.strøm_farve(Neopixel_strøm.farver["rød"], True)
         sleep(1)
@@ -86,8 +78,3 @@ def co2_stadier():
 def pls():
     sorte_knap()
     co2_stadier()
-
-
-
-# while True:
-#     pls()
