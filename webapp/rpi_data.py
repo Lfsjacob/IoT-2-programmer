@@ -5,35 +5,25 @@ from time import sleep
 import datetime
 import extract_db_data
 
+id_inc = 1
 
 def get_rpi_data(arg):
     msg = subscribe.simple("paho/test/topic", hostname="20.107.250.219")
     dekodet_besked = json.loads(msg.payload.decode())
-    # print(dekodet_besked)
     if arg == "type":
         return dekodet_besked['Strømtype']
     elif arg == "forbrug":
         return dekodet_besked['Strømforbrug']
 
-
-
-
-id_inc = 1
-
 def insert_strømforbrug_data_to_db():
-
     global id_inc
-
     antal_tabel_punkter = extract_db_data.get_ids("Strømforbrug")
-    # print(antal_tabel_punkter)
-    # print(id_inc)
 
     conn = sqlite3.connect("database/web_database.db")
 
     datetime_data = datetime.datetime.now()
     tidspunkt = datetime_data.strftime("%X")
     strømforbrug = round(float(get_rpi_data("forbrug")/1000), 2)
-    # print(f"forbrug = {strømforbrug}")
     
     if antal_tabel_punkter < 12:
         antal_tabel_punkter += 1
@@ -65,7 +55,6 @@ def insert_strømforbrug_data_to_db():
         id_inc += 1
     elif id_inc >=12:
         id_inc = 1
-    
 
 def delete_data():
     try:
@@ -82,6 +71,3 @@ def log():
     while True:
         insert_strømforbrug_data_to_db()
         sleep(280)
-    
-# log()
-# delete_data()
