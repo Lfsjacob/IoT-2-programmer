@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title%}Smart Plug{% endblock%}
+{% block content%}
+
+<!--<img class="img-fluid" src="static/forside.jpg" alt="Forside"-->
+
+<div class= "overskrift">
+    <h3>Strømtype: {{strømtype}}</h3>
+</div>
+
+    <img class="img-fluid float-left" src='data:image/png;base64,{{prognose}}'/>
+    <img class="img-fluid float-left" src='data:image/png;base64,{{strømforbrug}}'/>
+
+<div class="under_overskrift">
+    <h3>Du er bæredygtig! Godt gået</h3>
+</div>
+
+{% endblock %}
+
