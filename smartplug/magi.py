@@ -72,9 +72,3 @@ def co2_stadier():
         Neopixel_strøm.strøm_farve(Neopixel_strøm.farver["rød"], True)
         sleep(1)
         return status, effekt
-    
-
-
-def pls():
-    sorte_knap()
-    co2_stadier()
